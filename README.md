@@ -1,5 +1,7 @@
 # Mohr Planes of Sand
 
+**Live demo:** [mohrplanesofsand-production.up.railway.app](https://mohrplanesofsand-production.up.railway.app/)
+
 Interactive visualizer for stresses along Mohr planes and the angle of repose of a sand dune.
 
 Drag sliders for friction angle φ, cohesion c, and principal stresses σ₁/σ₃ and watch the
