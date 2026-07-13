@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mohr Planes — Sand Dune Angle</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <header class="hero">
+    <p class="brand">Mohr Planes</p>
+    <h1>Stresses that set a sand dune’s angle</h1>
+    <p class="lede">
+      Drag the sliders to change friction, cohesion, and principal stresses.
+      Watch the Mohr circle, the failure envelope, and the dune slope move together.
+    </p>
+  </header>
+
+  <main class="layout">
+    <section class="panel viz" aria-label="Visualizations">
+      <div class="canvas-block">
+        <div class="canvas-head">
+          <h2>Mohr circle</h2>
+          <ul class="legend">
+            <li><span class="swatch" style="--sw:#2c4a5e"></span>stress circle</li>
+            <li><span class="swatch" style="--sw:#b54a2a"></span>failure envelope</li>
+            <li><span class="swatch" style="--sw:#8b6914"></span>plane θ</li>
+            <li><span class="swatch swatch-dash" style="--sw:#b54a2a"></span>critical plane</li>
+          </ul>
+        </div>
+        <canvas id="mohr" width="720" height="440"></canvas>
+        <p class="hint">A plane tilted θ from σ₁ maps to the point at 2θ around the circle. Failure occurs when the circle touches the red envelope.</p>
+      </div>
+      <div class="canvas-block">
+        <div class="canvas-head">
+          <h2>Sand dune</h2>
+        </div>
+        <canvas id="dune" width="720" height="330"></canvas>
+        <p class="hint">The lee slip face rests at the angle of repose α — the steepest slope the Mohr–Coulomb envelope allows.</p>
+      </div>
+    </section>
+
+    <aside class="panel controls" aria-label="Parameters">
+      <h2>Parameters</h2>
+
+      <label class="slider">
+        <span class="slider-top">
+          <span>Friction angle φ</span>
+          <output id="phiOut">32°</output>
+        </span>
+        <input id="phi" type="range" min="5" max="45" step="0.5" value="32" />
+        <span class="slider-note">Internal friction of the sand</span>
+      </label>
+
+      <label class="slider">
+        <span class="slider-top">
+          <span>Cohesion c</span>
+          <output id="cOut">0 kPa</output>
+        </span>
+        <input id="c" type="range" min="0" max="40" step="0.5" value="0" />
+        <span class="slider-note">Dry dune sand ≈ 0; damp sand holds steeper faces</span>
+      </label>
+
+      <label class="slider">
+        <span class="slider-top">
+          <span>Minor principal stress σ₃</span>
+          <output id="s3Out">50 kPa</output>
+        </span>
+        <input id="s3" type="range" min="10" max="200" step="1" value="50" />
+      </label>
+
+      <label class="slider">
+        <span class="slider-top">
+          <span>Major principal stress σ₁</span>
+          <output id="s1Out">150 kPa</output>
+        </span>
+        <input id="s1" type="range" min="20" max="400" step="1" value="150" />
+      </label>
+
+      <label class="slider">
+        <span class="slider-top">
+          <span>Plane angle θ</span>
+          <output id="thetaOut">30°</output>
+        </span>
+        <input id="theta" type="range" min="0" max="90" step="0.5" value="30" />
+        <span class="slider-note">Orientation of the inspection plane (from σ₁)</span>
+      </label>
+
+      <div class="readout" id="readout"></div>
+
+      <div class="presets">
+        <button type="button" data-preset="dry">Dry dune</button>
+        <button type="button" data-preset="damp">Damp sand</button>
+        <button type="button" data-preset="critical">At failure</button>
+      </div>
+    </aside>
+  </main>
+
+  <footer class="foot">
+    <p>
+      For dry, cohesionless sand the angle of repose equals the friction angle, α ≈ φ.
+      Inside the pile, slip happens on planes tilted θ<sub>f</sub> = 45° + φ/2 from the
+      major principal stress — which is why the Mohr circle’s tangent point sits at 2θ<sub>f</sub>.
+    </p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

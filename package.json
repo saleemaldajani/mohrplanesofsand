@@ -1,0 +1,17 @@
+{
+  "name": "mohrplanesofsand",
+  "version": "1.0.0",
+  "description": "Interactive Mohr circle and sand dune angle-of-repose visualizer",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/saleemaldajani/mohrplanesofsand.git"
+  }
+}
